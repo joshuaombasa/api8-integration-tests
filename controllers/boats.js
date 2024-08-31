@@ -1,9 +1,9 @@
 const express = require('express')
 const Boat = require('../models/boat')
 
-const boatRouter = express.Router()
+const boatsRouter = express.Router()
 
-boatRouter.get('/', async (request, response, next) => {
+boatsRouter.get('/', async (request, response, next) => {
   const boats = await Boat.find({})
   try {
     response.send(boats)
@@ -12,7 +12,7 @@ boatRouter.get('/', async (request, response, next) => {
   }
 })
 
-boatRouter.get('/:id', async (request, response, next) => {
+boatsRouter.get('/:id', async (request, response, next) => {
   try {
     const boat = await Boat.findById(request.params.id)
     if (!boat) {
@@ -24,7 +24,7 @@ boatRouter.get('/:id', async (request, response, next) => {
   }
 })
 
-boatRouter.post('/', async (request, response, next) => {
+boatsRouter.post('/', async (request, response, next) => {
   const { name, licenced } = request.body
   try {
     const boatObject = new Boat({ name, licenced })
@@ -36,7 +36,7 @@ boatRouter.post('/', async (request, response, next) => {
 })
 
 
-boatRouter.put('/', async (request, response, next) => {
+boatsRouter.put('/', async (request, response, next) => {
   const { name, licenced } = request.body
   try {
     const updatedboat = await Boat.findByIdAndUpdate(
@@ -50,7 +50,7 @@ boatRouter.put('/', async (request, response, next) => {
   }
 })
 
-boatRouter.delete('/:id', async (request,response,next) => {
+boatsRouter.delete('/:id', async (request,response,next) => {
  
   try {
     await Boat.findByIdAndDelete(request.params.id)
@@ -60,4 +60,4 @@ boatRouter.delete('/:id', async (request,response,next) => {
   }
 })
 
-module.exports = boatRouter
+module.exports = boatsRouter
